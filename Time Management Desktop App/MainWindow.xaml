@@ -1,0 +1,96 @@
+﻿<Window x:Class="Time_Management_Desktop_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:local="clr-namespace:Time_Management_Desktop_App"
+        Title="Task Manager" Height="500" Width="800">
+    <Window.DataContext>
+        <!-- Set DataContext here for binding -->
+        <local:TaskManager />
+        <!-- Ensure this namespace is correct -->
+    </Window.DataContext>
+
+    <Grid Margin="10">
+        <!-- Top Section: List of Tasks -->
+        <ListView Name="TaskList" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300"
+          Background="#FFFFFF" BorderThickness="0" Padding="10" Margin="0,0,0,10"
+          SelectionMode="Single"
+          ItemsSource="{Binding Tasks}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding Title}" Width="250"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="250"/>
+                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline}" Width="150"/>
+                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <!-- Bottom Section: Add, Edit, Delete and Input Fields -->
+        <DockPanel VerticalAlignment="Bottom" Height="150">
+            <!-- Input Fields on the Bottom Left -->
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0">
+                <TextBox Name="TaskInput" Width="531" Padding="10"
+                         Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" Margin="0,0,0,5" Height="40"/>
+                <TextBox Name="DescriptionInput" Width="531" Padding="10"
+                         Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" Margin="0,0,0,5" Height="93"/>
+            </StackPanel>
+
+            <StackPanel Width="159" Height="144">
+                <DatePicker x:Name="DeadlinePicker" Width="120" Height="29" Margin="10" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
+                <ComboBox Name="PriorityComboBox" Width="120" Height="30" Margin="10">
+                    <ComboBoxItem Content="Low"/>
+                    <ComboBoxItem Content="Medium"/>
+                    <ComboBoxItem Content="High"/>
+                </ComboBox>
+                <StackPanel Orientation="Horizontal" Margin="10" Width="110">
+                    <!-- Hours ComboBox -->
+                    <ComboBox Name="HoursComboBox" Width="50" SelectedIndex="0">
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="1" />
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="3" />
+                        <ComboBoxItem Content="4" />
+                        <ComboBoxItem Content="5" />
+                        <ComboBoxItem Content="6" />
+                        <ComboBoxItem Content="7" />
+                        <ComboBoxItem Content="8" />
+                        <ComboBoxItem Content="9" />
+                        <ComboBoxItem Content="10" />
+                        <ComboBoxItem Content="11" />
+                        <ComboBoxItem Content="12" />
+                        <ComboBoxItem Content="13" />
+                        <ComboBoxItem Content="14" />
+                        <ComboBoxItem Content="15" />
+                        <ComboBoxItem Content="16" />
+                        <ComboBoxItem Content="17" />
+                        <ComboBoxItem Content="18" />
+                        <ComboBoxItem Content="19" />
+                        <ComboBoxItem Content="20" />
+                        <ComboBoxItem Content="21" />
+                        <ComboBoxItem Content="22" />
+                        <ComboBoxItem Content="23" />
+                    </ComboBox>
+
+                    <!-- Minutes ComboBox -->
+                    <ComboBox Name="MinutesComboBox" Width="50" SelectedIndex="0" Margin="10,0,0,0">
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="15" />
+                        <ComboBoxItem Content="30" />
+                        <ComboBoxItem Content="45" />
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Buttons on the Bottom Right -->
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="Add" Width="80" Margin="0,0,0,5" Background="#2196F3" Foreground="White"
+                        Click="AddTask_Click"/>
+                <Button Content="Edit" Width="80" Margin="0,0,0,5" Background="#FFC107" Foreground="White"
+                        Click="EditTask_Click"/>
+                <Button Content="Delete" Width="80" Margin="0,0,0,5" Background="#F44336" Foreground="White"
+                        Click="DeleteTask_Click"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
